@@ -57,7 +57,7 @@
 	        <h2 class="text-center">Sistema da oficina da MJV!</h2>
 	        <div class="row">
 	        	<div class="col-1"></div>
-		        <a class="col-4 my-2" href="/registro"><button class="mdc-button px-3 w-100 mdc-button--raised">
+		        <a class="col-4 my-2" href="/registro/cadastro"><button class="mdc-button px-3 w-100 mdc-button--raised">
 	  				<span class="mdc-button__label">Registro de defeitos veiculares</span>
 				</button></a>
 				<div class="col-1"></div>
@@ -76,6 +76,14 @@
 	  				<span class="mdc-button__label">Cadastrar defeitos</span>
 				</button></a>
 				<div class="col-1"></div>
+				<div class="col-12 row m-0">
+					<div class="col-4"></div>
+					<a class="col-4 my-2" href="/registro/consulta"><button class="mdc-button px-3 w-100 mdc-button--raised">
+		  				<span class="mdc-button__label">Consultar Registros</span>
+					</button></a>
+					<div class="col-4"></div>
+				</div>
+				
 	        </div>
 	        
 	      </div>

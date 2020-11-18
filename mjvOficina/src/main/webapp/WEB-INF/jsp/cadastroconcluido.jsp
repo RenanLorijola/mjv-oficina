@@ -60,7 +60,7 @@
 	        <h3 class="my-5">Cadastro feito com sucesso.</h3>
 	        
 	        <div class="row pb-4">
-				<a class="col-7 my-2 pl-0 pr-3"><button class="mdc-button w-100" style="color:#702094">
+				<a class="col-7 my-2 pl-0 pr-3" href="/registro/cadastro"><button class="mdc-button w-100" style="color:#702094">
 					  <div class="mdc-button__ripple"></div>
 					  <i class="material-icons mdc-button__icon" aria-hidden="true"
 					    >arrow_back</i

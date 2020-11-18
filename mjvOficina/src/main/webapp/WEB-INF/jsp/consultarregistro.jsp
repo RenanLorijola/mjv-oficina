@@ -75,25 +75,8 @@
 	    <div class="modal-content">
 	      <div class="modal-header row px-5 border-0">
 	      		<h3 class="my-4 col-12 w-100">Registros de defeitos veiculares</h3>
-	      		<div class="col-6 my-3">
-		        	<label class="mdc-text-field mdc-text-field--outlined w-100">
-						  <span class="mdc-notched-outline">
-						   <span class="mdc-notched-outline__leading"></span>
-						    <span class="mdc-notched-outline__notch">
-						      <span class="mdc-floating-label" id="my-label-id">Nome do cliente</span>
-						    </span>
-						    <span class="mdc-notched-outline__trailing"></span>
-						  </span>
-						  <input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
-						  <i class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0" role="button">check</i>
-					</label>
-	        	</div>
-	        	<div class="col-3 my-4">
-	        		<p id="data" class="mb-1"></p>
-	        		<p id="hora"></p>
-	        	</div>
-	        	<div class="col-6 mb-3">
-		        	<div class="mdc-select mdc-select--outlined w-75">
+	      		<div class="col-12 mb-3">
+		        	<div class="mdc-select mdc-select--outlined w-50">
 					  <div class="mdc-select__anchor" aria-labelledby="outlined-select-label">
 					    <span class="mdc-notched-outline">
 					      <span class="mdc-notched-outline__leading"></span>
@@ -171,6 +154,34 @@
 					  </div>
 					</div>
 		        </div>
+	      		<div class="col-6 my-3">
+		        	<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon w-100">
+						  <span class="mdc-notched-outline">
+						   <span class="mdc-notched-outline__leading"></span>
+						    <span class="mdc-notched-outline__notch">
+						      <span class="mdc-floating-label" id="my-label-id">Data ínicio</span>
+						    </span>
+						    <span class="mdc-notched-outline__trailing"></span>
+						  </span>
+						  <i class="material-icons mdc-text-field__icon mdc-text-field__icon--leading tabindex="0" role="button">calendar_today</i>
+						  <input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+
+					</label>
+	        	</div>
+	        	<div class="col-6 my-3">
+		        	<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon w-100">
+						  <span class="mdc-notched-outline">
+						   <span class="mdc-notched-outline__leading"></span>
+						    <span class="mdc-notched-outline__notch">
+						      <span class="mdc-floating-label" id="my-label-id">Data fim</span>
+						    </span>
+						    <span class="mdc-notched-outline__trailing"></span>
+						  </span>
+						  <i class="material-icons mdc-text-field__icon mdc-text-field__icon--leading tabindex="0" role="button">calendar_today</i>
+						  <input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+
+					</label>
+	        	</div>
 	      	</div>
 			<div class="modal-body px-5">
 				<div class="row pb-4 px-3">
@@ -180,43 +191,24 @@
 					      <thead style="background: #F0F0F0 !important">
 					        <tr class="mdc-data-table__header-row" style="background: #F0F0F0 !important">
 					          </th>
-						          <th class="mdc-data-table__header-cell" role="columnheader" scope="col" style="background: #F0F0F0 !important">Itens</th>
-						          <th class="mdc-data-table__header-cell" role="columnheader" scope="col" style="background: #F0F0F0 !important">Defeito</th>
-						          <th class="mdc-data-table__header-cell" role="columnheader" scope="col" style="background: #F0F0F0 !important">Peça</th>
+						          <th class="mdc-data-table__header-cell" role="columnheader" scope="col" style="background: #F0F0F0 !important">Cliente</th>
+						          <th class="mdc-data-table__header-cell" role="columnheader" scope="col" style="background: #F0F0F0 !important">Data</th>
+						          <th class="mdc-data-table__header-cell" role="columnheader" scope="col" style="background: #F0F0F0 !important">Veículo</th>
+						          <th class="mdc-data-table__header-cell" role="columnheader" scope="col" style="background: #F0F0F0 !important"></th>
 					          </tr>
 					      </thead>
 					      <tbody class="mdc-data-table__content">
 					        <tr data-row-id="u0" class="mdc-data-table__row">
-					          <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
-					            <div class="mdc-checkbox mdc-data-table__row-checkbox ml-3">
-					              <input type="checkbox" class="mdc-checkbox__native-control" aria-labelledby="u0"/>
-					              <div class="mdc-checkbox__background rounded-circle">
-					                <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-					                  <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
-					                </svg>
-					                <div class="mdc-checkbox__mixedmark"></div>
-					              </div>
-					              <div class="mdc-checkbox__ripple"></div>
-					            </div>
-					          </td>
-					          <td class="mdc-data-table__cell">Ferrugem</td>
-					          <td class="mdc-data-table__cell">Motor</td>
+					          <td class="mdc-data-table__cell">Sidney Matagal</td>
+					          <td class="mdc-data-table__cell">11/11/2020</td>
+					          <td class="mdc-data-table__cell">Carro</td>
+					          <td class="mdc-data-table__cell"><a style="text-decoration: underline !important; color:#FF7800">Ver detalhes</a></td>
 					        </tr>
-					        <tr data-row-id="u1" class="mdc-data-table__row">
-					          <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
-					            <div class="mdc-checkbox mdc-data-table__row-checkbox ml-3">
-					              <input type="checkbox" class="mdc-checkbox__native-control" aria-labelledby="u0"/>
-					              <div class="mdc-checkbox__background rounded-circle">
-					                <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-					                  <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
-					                </svg>
-					                <div class="mdc-checkbox__mixedmark"></div>
-					              </div>
-					              <div class="mdc-checkbox__ripple"></div>
-					            </div>
-					          </td>
-					          <td class="mdc-data-table__cell">Furo</td>
-					          <td class="mdc-data-table__cell">Mangueira</td>
+					        <tr data-row-id="u0" class="mdc-data-table__row">
+					          <td class="mdc-data-table__cell">Daniela de Mercúrio</td>
+					          <td class="mdc-data-table__cell">12/11/2020</td>
+					          <td class="mdc-data-table__cell">Lancha</td>
+					          <td class="mdc-data-table__cell"><a style="text-decoration: underline !important; color:#FF7800">Ver detalhes</a></td>
 					        </tr>
 					      </tbody>
 					    </table>
@@ -241,38 +233,12 @@
 	  </div>
 	</div>
 	<script>
-		$( document ).ready(function() {
-			const now = new Date();
-
-			// Formata a data conforme dd/mm/aaaa e hh:ii:ss
-			const data = "Acesso: " + zeroFill(now.getUTCDate()) + '/' + zeroFill((now.getMonth() + 1)) + '/' + now.getFullYear();
-			const hora = "Horário: " +  zeroFill(now.getHours()) + ':' + zeroFill(now.getMinutes()) + ':' + zeroFill(now.getSeconds());
-			// Exibe na tela usando as divs data e hora
-			document.getElementById('data').innerHTML = data;
-			document.getElementById('hora').innerHTML = hora;
-			
+		$( document ).ready(function(){
 			$('#staticBackdrop').modal("show");
 			mdc.ripple.MDCRipple.attachTo(document.querySelector('.mdc-button'));
 			mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
 			mdc.select.MDCSelect.attachTo(document.querySelector('.mdc-select'));
 		})
-		
-		const zeroFill = n => {
-				return ('0' + n).slice(-2);
-		}
-
-		// Cria intervalo
-		const interval = setInterval(() => {
-		// Pega o horário atual
-		const now = new Date();
-
-		// Formata a data conforme dd/mm/aaaa e hh:ii:ss
-		const data = "Acesso: " + zeroFill(now.getUTCDate()) + '/' + zeroFill((now.getMonth() + 1)) + '/' + now.getFullYear();
-		const hora = "Horário: " +  zeroFill(now.getHours()) + ':' + zeroFill(now.getMinutes()) + ':' + zeroFill(now.getSeconds());
-		// Exibe na tela usando as divs data e hora
-		document.getElementById('data').innerHTML = data;
-		document.getElementById('hora').innerHTML = hora;
-		}, 1000);
 	</script>
 </body>
 </html>

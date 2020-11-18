@@ -13,9 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/registro")
 public class RegistroController {
 	
-	@GetMapping
-	public String iniciarRegistro() {
+	@GetMapping("/cadastro")
+	public String cadastrarRegistro() {
 		return "cadastrarregistro";
+	}
+	
+	@GetMapping("/consulta")
+	public String consultarRegistro() {
+		return "consultarregistro";
 	}
 	
 }
