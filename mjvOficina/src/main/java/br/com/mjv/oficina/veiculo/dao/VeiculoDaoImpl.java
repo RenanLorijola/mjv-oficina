@@ -86,7 +86,21 @@ public class VeiculoDaoImpl implements VeiculoDao {
 		}
 		
 		LOGGER.info("Fim do método linkarPecas");
-		
+	}
+	
+	@Override
+	public Veiculo getById(Integer id) {
+		String sql = "SELECT * FROM TB_VEICULO WHERE idVeiculo = :idVeiculo";
+		try {
+			LOGGER.info("Inicio do método getById");
+			MapSqlParameterSource param = new MapSqlParameterSource().addValue("idVeiculo", id);
+			Veiculo veiculo = template.queryForObject(sql, param, new VeiculoRowMapper());
+			LOGGER.info("Fim do método getById");
+			return veiculo;
+		}catch(EmptyResultDataAccessException e) {
+			LOGGER.error("Erro emptyResult no método getById: " + e.getMessage());
+			return null;
+		}
 	}
 
 }

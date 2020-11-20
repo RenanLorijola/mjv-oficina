@@ -15,7 +15,6 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import br.com.mjv.oficina.defeito.model.Defeito;
-import br.com.mjv.oficina.defeito.model.DefeitoRowMapper;
 import br.com.mjv.oficina.peca.model.Peca;
 import br.com.mjv.oficina.peca.model.PecaRowMapper;
 
@@ -91,26 +90,19 @@ public class PecaDaoImpl implements PecaDao {
 		
 		LOGGER.info("Fim do método linkarDefeitos");
 	}
-
+	
 	@Override
-	public List<Defeito> listarDefeitosPecas(Peca peca) {
-		LOGGER.info("Inicio do método getPecaFirstResultByName");
-		
-		String sql = "SELECT p.nome, d.*, dp.fkIdDefeito, pd.fkIdPeca \r\n"
-				+ " FROM TB_PECA p, TB_DEFEITO d, TB_DEFEITO_PECA dp\r\n"
-				+ " WHERE fkIdDefeito = idDefeito \r\n"
-				+ " AND fkIdPeca = idPeca";
+	public Peca getById(Integer id) {
+		String sql = "SELECT * FROM TB_PECA WHERE idPeca = :idPeca";
 		try {
-			MapSqlParameterSource params = new MapSqlParameterSource();
-			params.addValue("idPeca", peca.getIdPeca());
-			
-			List<Defeito> list = template.query(sql, params, new DefeitoRowMapper());
-			return list;
+			LOGGER.info("Inicio do método getById");
+			MapSqlParameterSource param = new MapSqlParameterSource().addValue("idPeca", id);
+			Peca peca = template.queryForObject(sql, param, new PecaRowMapper());
+			LOGGER.info("Fim do método getById");
+			return peca;
 		}catch(EmptyResultDataAccessException e) {
-			LOGGER.error("MangaHQDaoImpl - " + e.getMessage());
+			LOGGER.error("Erro emptyResult no método getById: " + e.getMessage());
 			return null;
-		}finally {
-			LOGGER.info("MangaHQDaoImpl - Fim do método listarMangasHqsUsuario");
 		}
 	}
 

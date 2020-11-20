@@ -56,29 +56,6 @@ public class RegistroController {
 		return "cadastrarregistro";
 	}
 	
-	/**
-	 * Método para pegar os valores de {@link Peca} e {@link Defeito} a partir do nome do {@link Veiculo}
-	 * @param name
-	 * @return {@link ResponseEntity}
-	 */
-	@RequestMapping(value="/defeitospecas", method=RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody 
-	public ResponseEntity<Object> getDefeitosPecas(@RequestParam(required = false) String name) {
-		LOGGER.info("Inicio do método @Get checkVeiculosName");
-		
-		String cap = name.substring(0, 1).toUpperCase() + name.substring(1);
-		
-		Veiculo veiculo = veiculoService.getVeiculoFirstResultByName(cap);
-		
-		if(veiculo == null) {
-			LOGGER.info("Fim do método @Get checkVeiculosName");
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}else {
-			LOGGER.info("Fim do método @Get checkVeiculosName");
-			return new ResponseEntity<>("body", HttpStatus.OK);
-		}
-	}
-	
 	@GetMapping("/consulta")
 	public String consultarRegistro() {
 		return "consultarregistro";

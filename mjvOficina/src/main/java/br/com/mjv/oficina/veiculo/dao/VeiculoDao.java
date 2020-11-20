@@ -21,7 +21,7 @@ public interface VeiculoDao {
 	
 	/**
 	 * Retorna uma peça de acordo com seu nome exato
-	 * @return
+	 * @return {@link Veiculo}
 	 */
 	Veiculo getVeiculoFirstResultByName(String name);
 	
@@ -30,4 +30,10 @@ public interface VeiculoDao {
 	 * @params list, idPeca 
 	 */
 	void linkarPecas(List<Peca> list, Integer idVeiculo);
+	
+	/**
+	 * Retorna uma peça de acordo com seu id
+	 * @return {@link Veiculo}
+	 */
+	Veiculo getById(Integer id);
 }

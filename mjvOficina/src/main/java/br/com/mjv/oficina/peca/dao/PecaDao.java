@@ -21,7 +21,7 @@ public interface PecaDao {
 	
 	/**
 	 * Retorna uma peça de acordo com seu nome exato
-	 * @return
+	 * @return {@link Peca}
 	 */
 	Peca getPecaFirstResultByName(String name);
 	
@@ -31,5 +31,9 @@ public interface PecaDao {
 	 */
 	void linkarDefeitos(List<Defeito> list, Integer idPeca);
 	
-	List<Defeito> listarDefeitosPecas(Peca peca);
+	/**
+	 * Retorna uma peça de acordo com seu id
+	 * @return {@link Peca}
+	 */
+	Peca getById(Integer id);
 }
