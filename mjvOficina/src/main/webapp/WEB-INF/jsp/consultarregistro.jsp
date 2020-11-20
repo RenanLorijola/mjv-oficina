@@ -155,7 +155,7 @@
 					</div>
 		        </div>
 	      		<div class="col-6 my-3">
-		        	<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon w-100">
+		        	<label class="mdc-text-field data-incio mdc-text-field--outlined mdc-text-field--with-leading-icon w-100">
 						  <span class="mdc-notched-outline">
 						   <span class="mdc-notched-outline__leading"></span>
 						    <span class="mdc-notched-outline__notch">
@@ -164,12 +164,12 @@
 						    <span class="mdc-notched-outline__trailing"></span>
 						  </span>
 						  <i class="material-icons mdc-text-field__icon mdc-text-field__icon--leading tabindex="0" role="button">calendar_today</i>
-						  <input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+						  <input class="mdc-text-field__input" type="date" aria-labelledby="my-label-id">
 
 					</label>
 	        	</div>
 	        	<div class="col-6 my-3">
-		        	<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon w-100">
+		        	<label class="mdc-text-field data-fim mdc-text-field--outlined mdc-text-field--with-leading-icon w-100">
 						  <span class="mdc-notched-outline">
 						   <span class="mdc-notched-outline__leading"></span>
 						    <span class="mdc-notched-outline__notch">
@@ -178,8 +178,7 @@
 						    <span class="mdc-notched-outline__trailing"></span>
 						  </span>
 						  <i class="material-icons mdc-text-field__icon mdc-text-field__icon--leading tabindex="0" role="button">calendar_today</i>
-						  <input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
-
+						  <input class="mdc-text-field__input" type="date" aria-labelledby="my-label-id">
 					</label>
 	        	</div>
 	      	</div>
@@ -202,7 +201,7 @@
 					          <td class="mdc-data-table__cell">Sidney Matagal</td>
 					          <td class="mdc-data-table__cell">11/11/2020</td>
 					          <td class="mdc-data-table__cell">Carro</td>
-					          <td class="mdc-data-table__cell"><a style="text-decoration: underline !important; color:#FF7800">Ver detalhes</a></td>
+					          <td class="mdc-data-table__cell"><a style="text-decoration: underline !important; color:#FF7800;">Ver detalhes</a></td>
 					        </tr>
 					        <tr data-row-id="u0" class="mdc-data-table__row">
 					          <td class="mdc-data-table__cell">Daniela de Mercúrio</td>
@@ -226,7 +225,7 @@
 				<span class="mdc-button__label">Voltar ao menu</span>
 				</button></a>
 				<a class="col-5" href="/concluido"><button class="mdc-button px-3 w-100 mdc-button--raised" style="background:#702094; border-radius: 20px">
-		  			<span class="mdc-button__label">Salvar</span>
+		  			<span class="mdc-button__label">Pesquisar</span>
 				</button></a>
 	       </div>
 	    </div>
@@ -236,7 +235,8 @@
 		$( document ).ready(function(){
 			$('#staticBackdrop').modal("show");
 			mdc.ripple.MDCRipple.attachTo(document.querySelector('.mdc-button'));
-			mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
+			mdc.textField.MDCTextField.attachTo(document.querySelector('.data-incio'));
+			mdc.textField.MDCTextField.attachTo(document.querySelector('.data-fim'));
 			mdc.select.MDCSelect.attachTo(document.querySelector('.mdc-select'));
 		})
 	</script>

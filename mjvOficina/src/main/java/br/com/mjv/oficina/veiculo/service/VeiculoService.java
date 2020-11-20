@@ -1,11 +1,11 @@
-package br.com.mjv.oficina.veiculo.dao;
+package br.com.mjv.oficina.veiculo.service;
 
 import java.util.List;
 
 import br.com.mjv.oficina.peca.model.Peca;
 import br.com.mjv.oficina.veiculo.model.Veiculo;
 
-public interface VeiculoDao {
+public interface VeiculoService {
 
 	/**
 	 * Retorna uma lista de peças

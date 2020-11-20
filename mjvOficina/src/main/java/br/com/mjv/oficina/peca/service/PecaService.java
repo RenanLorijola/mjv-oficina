@@ -1,12 +1,12 @@
-package br.com.mjv.oficina.peca.dao;
+package br.com.mjv.oficina.peca.service;
 
 import java.util.List;
 
 import br.com.mjv.oficina.defeito.model.Defeito;
 import br.com.mjv.oficina.peca.model.Peca;
 
-public interface PecaDao {
-
+public interface PecaService {
+	
 	/**
 	 * Retorna uma lista de peças
 	 * @return List<{@link Peca}>

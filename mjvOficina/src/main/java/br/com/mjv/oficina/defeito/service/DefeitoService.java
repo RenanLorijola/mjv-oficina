@@ -1,11 +1,11 @@
-package br.com.mjv.oficina.defeito.dao;
+package br.com.mjv.oficina.defeito.service;
 
 import java.util.List;
 
 import br.com.mjv.oficina.defeito.model.Defeito;
 
-public interface DefeitoDao {
-	
+public interface DefeitoService {
+
 	/**
 	 * Retorna uma lista de defeitos
 	 * @return List<{@link Defeitos}>
