@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.mjv.oficina.defeito.model.Defeito;
 import br.com.mjv.oficina.defeito.service.DefeitoService;
 import br.com.mjv.oficina.peca.model.Peca;
+import br.com.mjv.oficina.veiculo.model.Veiculo;
 
 
 /**
@@ -39,6 +40,12 @@ public class DefeitoController {
 	@Autowired
 	private DefeitoService defeitoService;
 	
+	/**
+	 * Controller para a rota /defeito
+	 * @return uma página de cadastro de defeitos
+	 * @routes
+	 * GET /defeito
+	 */
 	@GetMapping
 	public ModelAndView cadastrarDefeitos() {
 		ModelAndView mv = null;
@@ -55,6 +62,12 @@ public class DefeitoController {
 		}
 	}
 	
+	/**
+	 * Método para validar o cadastro de um {@link Defeito}
+	 * @param nome
+	 * @param model
+	 * @return para a página cadastroconcluido caso o cadastro seja bem sucedido.
+	 */
 	@PostMapping("/cadastrar")
 	public String salvarDefeito(String nome, Model model) {
 		LOGGER.info("Inicio do método @Post salvarDefeito");
@@ -80,6 +93,11 @@ public class DefeitoController {
 		
 	}
 	
+	/**
+	 * Método para checar se já existe o cadastro de um {@link Defeito} no banco de dados a partir do seu nome
+	 * @param name
+	 * @return {@link ResponseEntity}
+	 */
 	@RequestMapping(value="/checkname", method=RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody 
 	public ResponseEntity<Object> checkDefeitosName(@RequestParam(required = false) String name) {

@@ -54,7 +54,7 @@ INSERT INTO TB_VEICULO (nome) VALUES
 ('Carro'),
 ('Moto'),
 ('Navio'),
-('Aviao');
+('Avião');
 
 INSERT INTO TB_DEFEITO_PECA(fkIdDefeito, fkIdPeca) VALUES
 (1, 1),

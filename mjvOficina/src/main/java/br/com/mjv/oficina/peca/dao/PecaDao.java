@@ -30,4 +30,6 @@ public interface PecaDao {
 	 * @params list, idPeca 
 	 */
 	void linkarDefeitos(List<Defeito> list, Integer idPeca);
+	
+	List<Defeito> listarDefeitosPecas(Peca peca);
 }

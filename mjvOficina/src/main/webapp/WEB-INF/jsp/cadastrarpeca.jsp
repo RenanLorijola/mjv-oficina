@@ -75,7 +75,7 @@
 						  </span>
 						  <i class="material-icons mdc-text-field__icon mdc-text-field__icon--leading" tabindex="0" role="button">history_edu</i>
 						  <input name="nome" id="inputName" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
-						  <i id="vericado" style="display: none" class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0" role="button">check</i>
+						  <i id="verificado" style="display: none" class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0" role="button">check</i>
 					</label>
 	        	</div>
 	      	</div>
@@ -108,7 +108,7 @@
 							    </div>
 							    <div class="mdc-checkbox__ripple"></div>
 							  </div>
-							  <label class="ml-5" for="checkbox-1" style="margin-bottom: 30px"><c:out value="${ defeito.nome }"></c:out></label>
+							  <label class="ml-5" for="<c:out value="${ defeito.idDefeito }"></c:out>" style="margin-bottom: 30px"><c:out value="${ defeito.nome }"></c:out></label>
 				        	</div>
 			        	</c:forEach>
 		        	</div>
@@ -148,7 +148,7 @@
 		    }else{
 				checked--
 			}
-		    if($("#vericado").text() == "check" && checked > 0) {
+		    if($("#verificado").text() == "check" && $("#verificado").css("display") == "block" && checked > 0) {
 		    	$("#salvar").prop("disabled", false)
 		        $("#salvar").css("background","#702094")
 			}
@@ -161,7 +161,7 @@
 		$("#inputName").on("input", function () {
 			
 			if($('#inputName').val() == '') {
-				$("#vericado").css("display","none")
+				$("#verificado").css("display","none")
 				$("#salvar").prop("disabled", true)
 			    $("#salvar").css("background","#BFBFBF")
 				return;
@@ -173,14 +173,14 @@
 				contentType: 'application/json',
 				data: {name: $("#inputName").val()},
 				success: function(data, textStatus, xhr) {
-			        $("#vericado").text("close")
-			        $("#vericado").css("display","block")
+			        $("#verificado").text("close")
+			        $("#verificado").css("display","block")
 			        $("#salvar").prop("disabled", true)
 			        $("#salvar").css("background","#BFBFBF")
 			    },
 			    error: function (jqXhr, textStatus, errorMessage) {
-			    	$("#vericado").text("check")
-			    	$("#vericado").css("display","block")
+			    	$("#verificado").text("check")
+			    	$("#verificado").css("display","block")
 			    	if(checked > 0){
 			    		$("#salvar").prop("disabled", false)
 				        $("#salvar").css("background","#702094")

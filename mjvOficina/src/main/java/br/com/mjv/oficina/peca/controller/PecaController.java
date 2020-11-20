@@ -24,6 +24,7 @@ import br.com.mjv.oficina.defeito.model.Defeito;
 import br.com.mjv.oficina.defeito.service.DefeitoService;
 import br.com.mjv.oficina.peca.model.Peca;
 import br.com.mjv.oficina.peca.service.PecaService;
+import br.com.mjv.oficina.veiculo.model.Veiculo;
 
 /**
  * Classe controller para o cadastro de {@link Peca}
@@ -42,6 +43,12 @@ public class PecaController {
 	@Autowired
 	private DefeitoService defeitoService;
 	
+	/**
+	 * Controller para a rota /peca
+	 * @return uma página de cadastro de peças, com o atributo defeitosList vindo do return da função {@link DefeitoService}.getAllDefeitos()
+	 * @routes
+	 * GET /peca
+	 */
 	@GetMapping
 	public String cadastrarPeca(Model model) {
 			LOGGER.info("Início do método @Get cadastrarPeca");
@@ -53,10 +60,17 @@ public class PecaController {
 			return "cadastrarpeca";
 	}
 	
+	/**
+	 * Método para validar o cadastro de uma {@link Peca}
+	 * @param nome
+	 * @param model
+	 * @param defeitos
+	 * @return para a página cadastroconcluido caso o cadastro seja bem sucedido.
+	 */
 	@PostMapping("/cadastrar")
 	public String salvarPeca(@RequestParam("defeito") String[] defeitos, @RequestParam("nome") String nome,Model model) {
 		
-		LOGGER.info("Início do método @Post cadastrarPeca");
+		LOGGER.info("Início do método @Post salvarPeca");
 		
 		if(StringUtils.isEmpty(nome) || defeitos.length == 0) {
 			return "redirect:/peca";
@@ -79,10 +93,15 @@ public class PecaController {
 		
 		pecaService.linkarDefeitos(listDefeitos, idPeca);
 		
-		LOGGER.info("Fim postCadastroPeca");
+		LOGGER.info("Início do método @Post salvarPeca");
 		return "cadastroconcluido"; 
 	}
 	
+	/**
+	 * Método para checar se já existe o cadastro de uma {@link Peca} no banco de dados a partir do seu nome
+	 * @param name
+	 * @return {@link ResponseEntity}
+	 */
 	@RequestMapping(value="/checkname", method=RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody 
 	public ResponseEntity<Object> checkPecasName(@RequestParam(required = false) String name) {

@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import br.com.mjv.oficina.defeito.model.Defeito;
+import br.com.mjv.oficina.defeito.model.DefeitoRowMapper;
 import br.com.mjv.oficina.peca.model.Peca;
 import br.com.mjv.oficina.peca.model.PecaRowMapper;
 
@@ -89,6 +90,28 @@ public class PecaDaoImpl implements PecaDao {
 		}
 		
 		LOGGER.info("Fim do método linkarDefeitos");
+	}
+
+	@Override
+	public List<Defeito> listarDefeitosPecas(Peca peca) {
+		LOGGER.info("Inicio do método getPecaFirstResultByName");
+		
+		String sql = "SELECT p.nome, d.*, dp.fkIdDefeito, pd.fkIdPeca \r\n"
+				+ " FROM TB_PECA p, TB_DEFEITO d, TB_DEFEITO_PECA dp\r\n"
+				+ " WHERE fkIdDefeito = idDefeito \r\n"
+				+ " AND fkIdPeca = idPeca";
+		try {
+			MapSqlParameterSource params = new MapSqlParameterSource();
+			params.addValue("idPeca", peca.getIdPeca());
+			
+			List<Defeito> list = template.query(sql, params, new DefeitoRowMapper());
+			return list;
+		}catch(EmptyResultDataAccessException e) {
+			LOGGER.error("MangaHQDaoImpl - " + e.getMessage());
+			return null;
+		}finally {
+			LOGGER.info("MangaHQDaoImpl - Fim do método listarMangasHqsUsuario");
+		}
 	}
 
 }

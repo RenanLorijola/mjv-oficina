@@ -84,8 +84,8 @@
 						    </span>
 						    <span class="mdc-notched-outline__trailing"></span>
 						  </span>
-						  <input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
-						  <i class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0" role="button">check</i>
+						  <input id="inputName" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+						  <i id="verificado" style="display: none" class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0" role="button">check</i>
 					</label>
 	        	</div>
 	        	<div class="col-3 my-4">
@@ -94,6 +94,7 @@
 	        	</div>
 	        	<div class="col-6 mb-3">
 		        	<div class="mdc-select mdc-select--outlined w-75">
+		        	  <input type="hidden" id="selectInput" name="selectInput">
 					  <div class="mdc-select__anchor" aria-labelledby="outlined-select-label">
 					    <span class="mdc-notched-outline">
 					      <span class="mdc-notched-outline__leading"></span>
@@ -124,49 +125,16 @@
 					      </svg>
 					    </span>
 					  </div>
-					
-					  <!-- Other elements from the select remain. -->
 					  <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
 					  	<ul class="mdc-list" role="listbox" aria-label="Food picker listbox">
-					      <li class="mdc-list-item mdc-list-item--selected" aria-selected="true" data-value="" role="option">
-					        <span class="mdc-list-item__ripple"></span>
-					      </li>
-					      <li class="mdc-list-item" aria-selected="false" data-value="grains" role="option">
+					      <c:forEach items="${ veiculosList }" var="veiculo" >
+					      <li class="mdc-list-item" aria-selected="false" data-value="<c:out value="${ veiculo.nome }"></c:out>" role="option">
 					        <span class="mdc-list-item__ripple"></span>
 					        <span class="mdc-list-item__text">
-					          veiculo 1
+					          <c:out value="${ veiculo.nome }"></c:out>
 					        </span>
 					      </li>
-					      <li class="mdc-list-item" aria-selected="false" data-value="vegetables" aria-disabled="true" role="option">
-					        <span class="mdc-list-item__ripple"></span>
-					        <span class="mdc-list-item__text">
-					          veiculo 2
-					        </span>
-					      </li>
-					      <li class="mdc-list-item" aria-selected="false" data-value="vegetables" aria-disabled="true" role="option">
-					        <span class="mdc-list-item__ripple"></span>
-					        <span class="mdc-list-item__text">
-					          veiculo 3
-					        </span>
-					      </li>
-					      <li class="mdc-list-item" aria-selected="false" data-value="vegetables" aria-disabled="true" role="option">
-					        <span class="mdc-list-item__ripple"></span>
-					        <span class="mdc-list-item__text">
-					          veiculo 4
-					        </span>
-					      </li>
-					      <li class="mdc-list-item" aria-selected="false" data-value="vegetables" aria-disabled="true" role="option">
-					        <span class="mdc-list-item__ripple"></span>
-					        <span class="mdc-list-item__text">
-					          veiculo 5
-					        </span>
-					      </li>
-					      <li class="mdc-list-item" aria-selected="false" data-value="vegetables" aria-disabled="true" role="option">
-					        <span class="mdc-list-item__ripple"></span>
-					        <span class="mdc-list-item__text">
-					          veiculo 6
-					        </span>
-					      </li>
+					      </c:forEach>
 					    </ul>
 					  </div>
 					</div>
@@ -273,6 +241,37 @@
 		document.getElementById('data').innerHTML = data;
 		document.getElementById('hora').innerHTML = hora;
 		}, 1000);
+
+		$("#inputName").on("input", function () {
+			if($('#inputName').val() == '') {
+				$("#verificado").css("display","none")
+				$("#salvar").prop("disabled", true)
+			    $("#salvar").css("background","#BFBFBF")
+				return;
+			}else{
+				$("#verificado").css("display","block");
+			}
+		})
+		
+		$(".mdc-list-item").on("click", function() {
+			setTimeout(function(){
+				console.log($("#selectInput").val())
+			}, 20);
+		})
+		
+		$('.mdc-select').bind("enterKey",function(e){
+			setTimeout(function(){ 
+				console.log($("#selectInput").val()) 
+			}, 20);
+		});
+
+		$('.mdc-select').keyup(function(e){
+		    if(e.keyCode == 13)
+		    {
+		        $(this).trigger("enterKey");
+		    }
+		});
+		
 	</script>
 </body>
 </html>

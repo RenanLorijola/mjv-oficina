@@ -63,7 +63,7 @@
 				<div class="col-1"></div>
 				<div class="col-1"></div>
 				<a class="col-4 my-2" href="/veiculo"><button class="mdc-button px-3 w-100 mdc-button--raised">
-	  				<span class="mdc-button__label">Cadastrar tipos de veículos</span>
+	  				<span class="mdc-button__label">Cadastrar tipo de veículo</span>
 				</button></a>
 				<div class="col-1"></div>
 				<div class="col-1"></div>

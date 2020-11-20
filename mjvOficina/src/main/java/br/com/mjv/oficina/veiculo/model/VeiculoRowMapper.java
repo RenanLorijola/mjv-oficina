@@ -29,7 +29,7 @@ public class VeiculoRowMapper implements RowMapper<Veiculo>{
 		veiculo.setNome(rs.getString("nome"));
 		
 		LOGGER.info("Inicio Veículo rowMapper");
-		return null;
+		return veiculo;
 	}
 
 	
