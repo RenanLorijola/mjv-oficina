@@ -143,7 +143,6 @@
 		let checked = 0
 		
 		$(".mdc-checkbox__native-control").change(function() {
-			console.log(checked)
 		    if(this.checked) {
 		    	checked++;
 		    }else{
@@ -157,7 +156,6 @@
 		    	$("#salvar").prop("disabled", true)
 			    $("#salvar").css("background","#BFBFBF")
 			}
-		    console.log(checked)
 		});
 		
 		$("#inputName").on("input", function () {

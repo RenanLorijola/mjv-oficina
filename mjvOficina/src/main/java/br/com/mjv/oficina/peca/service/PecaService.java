@@ -30,4 +30,11 @@ public interface PecaService {
 	 * @params list, idPeca 
 	 */
 	void linkarDefeitos(List<Defeito> list, Integer idPeca);
+	
+	/**
+	 * Retorna uma peça de acordo com seu id
+	 * @return {@link Peca}
+	 */
+	Peca getById(Integer id);
+
 }

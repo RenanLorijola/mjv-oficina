@@ -24,6 +24,8 @@ import br.com.mjv.oficina.defeito.model.Defeito;
 import br.com.mjv.oficina.defeito.service.DefeitoService;
 import br.com.mjv.oficina.peca.model.Peca;
 import br.com.mjv.oficina.peca.service.PecaService;
+import br.com.mjv.oficina.pecadefeito.model.PecaDefeito;
+import br.com.mjv.oficina.pecadefeito.service.PecaDefeitoService;
 import br.com.mjv.oficina.veiculo.model.Veiculo;
 import br.com.mjv.oficina.veiculo.service.VeiculoService;
 
@@ -39,11 +41,16 @@ public class VeiculoController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(VeiculoController.class);
 	
 	@Autowired
+	private DefeitoService defeitoService;
+	
+	@Autowired
 	private PecaService pecaService;
 	
 	@Autowired
 	private VeiculoService veiculoService;
 
+	@Autowired
+	private PecaDefeitoService pecaDefeitoService;
 	
 	/**
 	 * Controller para a rota /veiculo
@@ -80,7 +87,11 @@ public class VeiculoController {
 		
 		List<String> list = Arrays.asList(pecas);
 		
-		List<Peca> listPecas = new ArrayList<>();
+		List<Peca> listPeca = new ArrayList<>();
+		
+		List<Defeito> listDefeito = new ArrayList<>(); 
+		
+		List<PecaDefeito> listPecaDefeito = new ArrayList<>();
 		
 		Veiculo veiculo = new Veiculo();
 		
@@ -90,10 +101,12 @@ public class VeiculoController {
 		
 		for(String name : list) {
 			Peca peca = pecaService.getPecaFirstResultByName(name);
-			listPecas.add(peca);
+			listPeca.add(peca);
 		}
 		
-		veiculoService.linkarPecas(listPecas, idVeiculo);
+		veiculoService.linkarPecas(listPeca, idVeiculo);
+		
+		veiculoService.linkarProblemas(listPeca, idVeiculo);
 		
 		LOGGER.info("Fim do método @Post salvarVeiculo");
 		return "cadastroconcluido"; 

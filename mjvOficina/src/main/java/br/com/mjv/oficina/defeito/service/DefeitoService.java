@@ -23,4 +23,10 @@ public interface DefeitoService {
 	 * @return
 	 */
 	Defeito getDefeitoFirstResultByName(String name);
+	
+	/**
+	 * Retorna um defeito de acordo com seu id
+	 * @return {@link Defeito}
+	 */
+	Defeito getById(Integer id);
 }

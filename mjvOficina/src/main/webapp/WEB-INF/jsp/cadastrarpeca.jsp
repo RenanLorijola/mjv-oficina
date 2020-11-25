@@ -161,7 +161,7 @@
 		$("#inputName").on("input", function () {
 			
 			if($('#inputName').val() == '') {
-				$("#verificado").css("display","none")
+				$("#verificado").hide()
 				$("#salvar").prop("disabled", true)
 			    $("#salvar").css("background","#BFBFBF")
 				return;

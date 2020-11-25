@@ -66,12 +66,16 @@
 		.mdc-menu-surface--open{
 			max-height: 200px !important
 		}
+		
+		.btn:focus{
+			box-shadow: none !important;
+		}
 	</style>
 </head>
 <body>
 	<!-- Modal -->
 	<div class="modal" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-	  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+	  <div class="modal-dialog modal-lg modal-dialog-centered">
 	    <div class="modal-content">
 	      <div class="modal-header row px-5 border-0">
 	      		<h3 class="my-4 col-12 w-100">Registros de defeitos veiculares</h3>
@@ -111,45 +115,14 @@
 					  <!-- Other elements from the select remain. -->
 					  <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
 					  	<ul class="mdc-list" role="listbox" aria-label="Food picker listbox">
-					      <li class="mdc-list-item mdc-list-item--selected" aria-selected="true" data-value="" role="option">
-					        <span class="mdc-list-item__ripple"></span>
-					      </li>
+					      <c:forEach items="${veiculosList}" var="veiculo">
 					      <li class="mdc-list-item" aria-selected="false" data-value="grains" role="option">
 					        <span class="mdc-list-item__ripple"></span>
 					        <span class="mdc-list-item__text">
-					          veiculo 1
+					          ${ veiculo.nome }
 					        </span>
 					      </li>
-					      <li class="mdc-list-item" aria-selected="false" data-value="vegetables" aria-disabled="true" role="option">
-					        <span class="mdc-list-item__ripple"></span>
-					        <span class="mdc-list-item__text">
-					          veiculo 2
-					        </span>
-					      </li>
-					      <li class="mdc-list-item" aria-selected="false" data-value="vegetables" aria-disabled="true" role="option">
-					        <span class="mdc-list-item__ripple"></span>
-					        <span class="mdc-list-item__text">
-					          veiculo 3
-					        </span>
-					      </li>
-					      <li class="mdc-list-item" aria-selected="false" data-value="vegetables" aria-disabled="true" role="option">
-					        <span class="mdc-list-item__ripple"></span>
-					        <span class="mdc-list-item__text">
-					          veiculo 4
-					        </span>
-					      </li>
-					      <li class="mdc-list-item" aria-selected="false" data-value="vegetables" aria-disabled="true" role="option">
-					        <span class="mdc-list-item__ripple"></span>
-					        <span class="mdc-list-item__text">
-					          veiculo 5
-					        </span>
-					      </li>
-					      <li class="mdc-list-item" aria-selected="false" data-value="vegetables" aria-disabled="true" role="option">
-					        <span class="mdc-list-item__ripple"></span>
-					        <span class="mdc-list-item__text">
-					          veiculo 6
-					        </span>
-					      </li>
+					      </c:forEach>
 					    </ul>
 					  </div>
 					</div>
@@ -185,32 +158,56 @@
 			<div class="modal-body px-5">
 				<div class="row pb-4 px-3">
 					<div class="mdc-data-table w-100" style="background: #F0F0F0">
-					  <div class="mdc-data-table__table-container w-100">
-					    <table class="mdc-data-table__table" aria-label="Dessert calories">
-					      <thead style="background: #F0F0F0 !important">
-					        <tr class="mdc-data-table__header-row" style="background: #F0F0F0 !important">
-					          </th>
-						          <th class="mdc-data-table__header-cell" role="columnheader" scope="col" style="background: #F0F0F0 !important">Cliente</th>
-						          <th class="mdc-data-table__header-cell" role="columnheader" scope="col" style="background: #F0F0F0 !important">Data</th>
-						          <th class="mdc-data-table__header-cell" role="columnheader" scope="col" style="background: #F0F0F0 !important">Veículo</th>
-						          <th class="mdc-data-table__header-cell" role="columnheader" scope="col" style="background: #F0F0F0 !important"></th>
-					          </tr>
-					      </thead>
-					      <tbody class="mdc-data-table__content">
-					        <tr data-row-id="u0" class="mdc-data-table__row">
-					          <td class="mdc-data-table__cell">Sidney Matagal</td>
-					          <td class="mdc-data-table__cell">11/11/2020</td>
-					          <td class="mdc-data-table__cell">Carro</td>
-					          <td class="mdc-data-table__cell"><a style="text-decoration: underline !important; color:#FF7800;">Ver detalhes</a></td>
-					        </tr>
-					        <tr data-row-id="u0" class="mdc-data-table__row">
-					          <td class="mdc-data-table__cell">Daniela de Mercúrio</td>
-					          <td class="mdc-data-table__cell">12/11/2020</td>
-					          <td class="mdc-data-table__cell">Lancha</td>
-					          <td class="mdc-data-table__cell"><a style="text-decoration: underline !important; color:#FF7800">Ver detalhes</a></td>
-					        </tr>
-					      </tbody>
-					    </table>
+					  <div class="w-100">
+					  	<div class="row">
+					  		<div class="col-1"></div>
+					  		<div class="col-3 py-3" style="font-family: 'Catamaran', sans-serif !important;font-weight: 700;font-size: 18px;">
+					  			CLIENTE
+					  		</div>
+					  		<div class="col-2 py-3" style="font-family: 'Catamaran', sans-serif !important;font-weight: 700;font-size: 18px;">
+					  			DATA
+					  		</div>
+					  		<div class="col-3 py-3" style="font-family: 'Catamaran', sans-serif !important;font-weight: 700;font-size: 18px;">
+					  			VEÍCULO
+					  		</div>
+					  		<div class="col-3 py-3">
+					  			
+					  		</div>
+					  	</div>
+					    <div class="accordion" id="accordionExample">
+					    <c:forEach items="${registrosList}" var="registro">
+						  <div class="card">
+						    <div class="card-header p-0" id="heading${ registro.idRegistro }">
+						        <div class="row">
+							  		<div class="col-1"></div>
+							  		<div class="col-3 py-3" style="font-family: 'Catamaran', sans-serif !important;font-size: 14px;vertical-align: middle;line-height: 2rem;">
+							  			${ registro.nomeCliente }
+							  		</div>
+							  		<div class="col-2 py-3" style="font-family: 'Catamaran', sans-serif !important;font-size: 14px;vertical-align: middle;line-height: 2rem;">
+							  			${ registro.data }
+							  		</div>
+							  		<div class="col-3 py-3" style="font-family: 'Catamaran', sans-serif !important;font-size: 14px;vertical-align: middle;line-height: 2rem;">
+							  			${ registro.nomeVeiculo }
+							  		</div>
+							  		<div class="col-3 py-3">
+							  			<button style="text-decoration: underline !important; color:#FF7800; border:none; font-family: 'Catamaran', sans-serif !important;font-size: 14px" class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse${ registro.idRegistro }" aria-expanded="true" aria-controls="collapse${ registro.idRegistro }">
+								          Ver detalhes
+								        </button>
+							  		</div>
+							  	</div>  
+						    </div>
+						    <div id="collapse${ registro.idRegistro }" class="collapse" aria-labelledby="heading${ registro.idRegistro }" data-parent="#accordionExample">
+						      <div class="card-body">
+						        <ul class="list-group">
+						          	<li class="list-group-item">Lista de problemas - futura implementação</li>
+						          	<li class="list-group-item">Lista de problemas - futura implementação</li>
+						          	<li class="list-group-item">Lista de problemas - futura implementação</li>
+								</ul>
+						      </div>
+						    </div>
+						  </div>
+						  </c:forEach>
+						</div>
 					  </div>
 				</div>
 	        </div>

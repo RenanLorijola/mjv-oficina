@@ -14,7 +14,10 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
+import br.com.mjv.oficina.defeito.model.Defeito;
 import br.com.mjv.oficina.peca.model.Peca;
+import br.com.mjv.oficina.pecadefeito.dao.PecaDefeitoDao;
+import br.com.mjv.oficina.pecadefeito.model.PecaDefeito;
 import br.com.mjv.oficina.veiculo.model.Veiculo;
 import br.com.mjv.oficina.veiculo.model.VeiculoRowMapper;
 
@@ -26,6 +29,9 @@ public class VeiculoDaoImpl implements VeiculoDao {
 	
 	@Autowired
 	private DataSource dataSource;
+	
+	@Autowired
+	private PecaDefeitoDao pecaDefeitoDao;
 	
 	private final Logger LOGGER = LoggerFactory.getLogger(VeiculoDaoImpl.class);
 	
@@ -86,6 +92,25 @@ public class VeiculoDaoImpl implements VeiculoDao {
 		}
 		
 		LOGGER.info("Fim do método linkarPecas");
+	}
+	
+	@Override
+	public void linkarProblemas(List<Peca> listPeca, Integer idVeiculo) {
+		LOGGER.info("Inicio do método linkarProblemas");
+		
+		SimpleJdbcInsert insert = new SimpleJdbcInsert(dataSource).withTableName("TB_PROBLEMA").usingColumns("fkIdDefeito", "fkIdPeca", "fkIdVeiculo");
+
+		for(Peca peca : listPeca) {
+			List<PecaDefeito> listPecaDefeito= pecaDefeitoDao.recuperarListDefeito(peca.getIdPeca());
+			
+			for(PecaDefeito pecaDefeito : listPecaDefeito) {
+				MapSqlParameterSource param = new MapSqlParameterSource().addValue("fkIdDefeito", pecaDefeito.getFkIdDefeito()).addValue("fkIdPeca", peca.getIdPeca()).addValue("fkIdVeiculo", idVeiculo);
+				insert.execute(param);
+			}
+			
+		}
+		LOGGER.info("Fim do método linkarProblemas");
+		
 	}
 	
 	@Override

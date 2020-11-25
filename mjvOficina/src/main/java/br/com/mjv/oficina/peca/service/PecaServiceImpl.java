@@ -35,4 +35,9 @@ public class PecaServiceImpl implements PecaService {
 		pecaDao.linkarDefeitos(list, idPeca);
 	}
 
+	@Override
+	public Peca getById(Integer id) {
+		return pecaDao.getById(id);
+	}
+
 }

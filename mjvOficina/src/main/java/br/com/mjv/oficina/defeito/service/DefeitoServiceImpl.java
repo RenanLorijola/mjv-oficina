@@ -30,4 +30,9 @@ public class DefeitoServiceImpl implements DefeitoService {
 		return defeitoDao.getDefeitoFirstResultByName(name);
 	}
 
+	@Override
+	public Defeito getById(Integer id) {
+		return defeitoDao.getById(id);
+	}
+
 }

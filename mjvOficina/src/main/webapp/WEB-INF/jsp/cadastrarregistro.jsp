@@ -11,7 +11,7 @@
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 	<!-- Fontes -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -71,140 +71,70 @@
 <body>
 	<!-- Modal -->
 	<div class="modal" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-	  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+	  <div class="modal-dialog modal-lg modal-dialog-centered">
 	    <div class="modal-content">
-	      <div class="modal-header row px-5 border-0">
-	      		<h3 class="my-4 col-12 w-100">Registros de defeitos veiculares</h3>
-	      		<div class="col-6 my-3">
-		        	<label class="mdc-text-field mdc-text-field--outlined w-100">
-						  <span class="mdc-notched-outline">
-						   <span class="mdc-notched-outline__leading"></span>
-						    <span class="mdc-notched-outline__notch">
-						      <span class="mdc-floating-label" id="my-label-id">Nome do cliente</span>
-						    </span>
-						    <span class="mdc-notched-outline__trailing"></span>
-						  </span>
-						  <input id="inputName" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
-						  <i id="verificado" style="display: none" class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0" role="button">check</i>
-					</label>
-	        	</div>
-	        	<div class="col-3 my-4">
-	        		<p id="data" class="mb-1"></p>
-	        		<p id="hora"></p>
-	        	</div>
-	        	<div class="col-6 mb-3">
-		        	<div class="mdc-select mdc-select--outlined w-75">
-		        	  <input type="hidden" id="selectInput" name="selectInput">
-					  <div class="mdc-select__anchor" aria-labelledby="outlined-select-label">
-					    <span class="mdc-notched-outline">
-					      <span class="mdc-notched-outline__leading"></span>
-					      <span class="mdc-notched-outline__notch">
-					        <span id="outlined-select-label" class="mdc-floating-label">Tipo de veículo</span>
-					      </span>
-					      <span class="mdc-notched-outline__trailing"></span>
-					    </span>
-					    <span class="mdc-select__selected-text-container">
-					      <span id="demo-selected-text" class="mdc-select__selected-text"></span>
-					    </span>
-					    <span class="mdc-select__dropdown-icon">
-					      <svg
-					          class="mdc-select__dropdown-icon-graphic"
-					          viewBox="7 10 10 5" focusable="false">
-					        <polygon
-					            class="mdc-select__dropdown-icon-inactive"
-					            stroke="none"
-					            fill-rule="evenodd"
-					            points="7 10 12 15 17 10">
-					        </polygon>
-					        <polygon
-					            class="mdc-select__dropdown-icon-active"
-					            stroke="none"
-					            fill-rule="evenodd"
-					            points="7 15 12 10 17 15">
-					        </polygon>
-					      </svg>
-					    </span>
-					  </div>
-					  <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
-					  	<ul class="mdc-list" role="listbox" aria-label="Food picker listbox">
-					      <c:forEach items="${ veiculosList }" var="veiculo" >
-					      <li class="mdc-list-item" aria-selected="false" data-value="<c:out value="${ veiculo.nome }"></c:out>" role="option">
-					        <span class="mdc-list-item__ripple"></span>
-					        <span class="mdc-list-item__text">
-					          <c:out value="${ veiculo.nome }"></c:out>
-					        </span>
-					      </li>
-					      </c:forEach>
-					    </ul>
-					  </div>
-					</div>
+	    	<form method="post" action="/registro/cadastrar">
+		      <div class="modal-header row px-5 border-0">
+		      		<h3 class="my-4 col-12 w-100">Registros de defeitos veiculares</h3>
+		      		<div class="col-6 my-3">
+			        	<label class="mdc-text-field mdc-text-field--outlined w-100">
+							  <span class="mdc-notched-outline">
+							   <span class="mdc-notched-outline__leading"></span>
+							    <span class="mdc-notched-outline__notch">
+							      <span class="mdc-floating-label" id="my-label-id">Nome do cliente</span>
+							    </span>
+							    <span class="mdc-notched-outline__trailing"></span>
+							  </span>
+							  <input name="nomeCliente" id="inputName" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+							  <i id="verificado" style="display: none" class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0" role="button">check</i>
+						</label>
+		        	</div>
+		        	<div class="col-3 my-4">
+		        		<p id="data" class="mb-1"></p>
+		        		<p id="hora"></p>
+		        	</div>
+		        	<div class="col-6 mb-3">
+						<div class="form-group ml-2 w-100">
+							    <label for="veiculos">Tipo de veículo:</label> 
+							    <select name="name" class="form-control" id="veiculos" style="height: 50px; width: 60%">
+							      <option value="">Selecione o veículo</option>
+							      <c:forEach items="${veiculosList}" var="veiculo">
+								      <option value="${ veiculo.nome }">${ veiculo.nome }</option>
+							      </c:forEach>
+							    </select>
+							</div> 
+			        </div>
+		      	</div>
+				<div class="modal-body px-5">
+					<div class="row pb-4 px-3">
+						<table class="table table-hover table-borderless ml-auto mr-auto mt-4 table-wrapper-scroll-y my-custom-scrollbar" style="width: 80%; background-color: #F0F0F0">
+						<thead>
+					    	<tr>
+						    	<th class="pr-2">ITENS</th>
+					        	<th style="padding-right: 70px;">DEFEITO</th>
+					        	<th>PEÇA</th>
+					    	</tr>
+					  	</thead>
+					  	<tbody id="tabela">
+						   
+						</tbody>
+					</table>
 		        </div>
-	      	</div>
-			<div class="modal-body px-5">
-				<div class="row pb-4 px-3">
-					<div class="mdc-data-table w-100" style="background: #F0F0F0">
-					  <div class="mdc-data-table__table-container w-100">
-					    <table class="mdc-data-table__table" aria-label="Dessert calories">
-					      <thead style="background: #F0F0F0 !important">
-					        <tr class="mdc-data-table__header-row" style="background: #F0F0F0 !important">
-					          </th>
-						          <th class="mdc-data-table__header-cell" role="columnheader" scope="col" style="background: #F0F0F0 !important">Itens</th>
-						          <th class="mdc-data-table__header-cell" role="columnheader" scope="col" style="background: #F0F0F0 !important">Defeito</th>
-						          <th class="mdc-data-table__header-cell" role="columnheader" scope="col" style="background: #F0F0F0 !important">Peça</th>
-					          </tr>
-					      </thead>
-					      <tbody class="mdc-data-table__content">
-					        <tr data-row-id="u0" class="mdc-data-table__row">
-					          <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
-					            <div class="mdc-checkbox mdc-data-table__row-checkbox ml-3">
-					              <input type="checkbox" class="mdc-checkbox__native-control" aria-labelledby="u0"/>
-					              <div class="mdc-checkbox__background rounded-circle">
-					                <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-					                  <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
-					                </svg>
-					                <div class="mdc-checkbox__mixedmark"></div>
-					              </div>
-					              <div class="mdc-checkbox__ripple"></div>
-					            </div>
-					          </td>
-					          <td class="mdc-data-table__cell">Ferrugem</td>
-					          <td class="mdc-data-table__cell">Motor</td>
-					        </tr>
-					        <tr data-row-id="u1" class="mdc-data-table__row">
-					          <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
-					            <div class="mdc-checkbox mdc-data-table__row-checkbox ml-3">
-					              <input type="checkbox" class="mdc-checkbox__native-control" aria-labelledby="u0"/>
-					              <div class="mdc-checkbox__background rounded-circle">
-					                <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-					                  <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
-					                </svg>
-					                <div class="mdc-checkbox__mixedmark"></div>
-					              </div>
-					              <div class="mdc-checkbox__ripple"></div>
-					            </div>
-					          </td>
-					          <td class="mdc-data-table__cell">Furo</td>
-					          <td class="mdc-data-table__cell">Mangueira</td>
-					        </tr>
-					      </tbody>
-					    </table>
-					  </div>
-				</div>
-	        </div>
-	      </div>
-	      <div class="modal-footer border-0 row pb-4 pr-5 pl-0">
-	        	<a class="col-6" href="/">
-	        	<button class="mdc-button" style="color:#702094">
-				<div class="mdc-button__ripple"></div>
-					  <i class="material-icons mdc-button__icon" aria-hidden="true"
-					    >arrow_back</i
-					  >
-				<span class="mdc-button__label">Voltar ao menu</span>
-				</button></a>
-				<a class="col-5" href="/concluido"><button class="mdc-button px-3 w-100 mdc-button--raised" style="background:#702094; border-radius: 20px">
-		  			<span class="mdc-button__label">Salvar</span>
-				</button></a>
-	       </div>
+		      </div>
+		      <div class="modal-footer border-0 row pb-4 pr-5 pl-0">
+		        	<a class="col-6" href="/">
+		        	<button type="button" class="mdc-button" style="color:#702094">
+					<div class="mdc-button__ripple"></div>
+						  <i class="material-icons mdc-button__icon" aria-hidden="true"
+						    >arrow_back</i
+						  >
+					<span class="mdc-button__label">Voltar ao menu</span>
+					</button></a>
+					<button disabled id="salvar" type="submit" class="mdc-button col-5 px-3 mdc-button--raised" style="background:#BFBFBF; border-radius: 20px">
+			  			<span class="mdc-button__label">Salvar</span>
+					</button>
+		       </div>
+	       </form>
 	    </div>
 	  </div>
 	</div>
@@ -222,9 +152,8 @@
 			$('#staticBackdrop').modal("show");
 			mdc.ripple.MDCRipple.attachTo(document.querySelector('.mdc-button'));
 			mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
-			mdc.select.MDCSelect.attachTo(document.querySelector('.mdc-select'));
 		})
-		
+
 		const zeroFill = n => {
 				return ('0' + n).slice(-2);
 		}
@@ -244,34 +173,73 @@
 
 		$("#inputName").on("input", function () {
 			if($('#inputName').val() == '') {
-				$("#verificado").css("display","none")
+				$("#verificado").hide()
 				$("#salvar").prop("disabled", true)
 			    $("#salvar").css("background","#BFBFBF")
-				return;
 			}else{
-				$("#verificado").css("display","block");
+				$("#verificado").show();
+				if(checked > 0) {
+			    	$("#salvar").prop("disabled", false)
+			        $("#salvar").css("background","#702094")
+				}
+			    else{
+			    	$("#salvar").prop("disabled", true)
+				    $("#salvar").css("background","#BFBFBF")
+				}
 			}
 		})
 		
-		$(".mdc-list-item").on("click", function() {
-			setTimeout(function(){
-				console.log($("#selectInput").val())
-			}, 20);
-		})
+		let checked = 0
 		
-		$('.mdc-select').bind("enterKey",function(e){
-			setTimeout(function(){ 
-				console.log($("#selectInput").val()) 
-			}, 20);
-		});
+		function checkboxAction(checkbox) {
+		    if(checkbox.checked) {
+		    	checked++;
+		    }else{
+				checked--
+			}
+		    if($("#verificado").text() == "check"  && $("#verificado").css("display") == "block" && checked > 0) {
+		    	$("#salvar").prop("disabled", false)
+		        $("#salvar").css("background","#702094")
+			}
+		    else{
+		    	$("#salvar").prop("disabled", true)
+			    $("#salvar").css("background","#BFBFBF")
+			}
+		};
 
-		$('.mdc-select').keyup(function(e){
-		    if(e.keyCode == 13)
-		    {
-		        $(this).trigger("enterKey");
-		    }
-		});
-		
+		$("#veiculos").change(function () {
+			$.ajax({
+				method: "GET",
+				url: '/registro/getproblemas',
+				contentType: 'application/json',
+				data: {name: $("#veiculos option:selected").val()},
+				success: function(response) {
+					$("#tabela").html("");
+
+					$("#salvar").prop("disabled", true)
+				    $("#salvar").css("background","#BFBFBF")
+										
+					checked = 0
+					
+					response.forEach((element) => {
+						$("#tabela").append(
+							"<tr>"+
+							"<td>"+
+							"<div class=" + "'custom-control'>" +
+								"<input onclick='checkboxAction(this)' name=" + "'problema'" + "value='" + element.fkIdProblema + "' type=" + "'checkbox' class='" + "rounded'" + "id='" + element.fkIdProblema + "' >" +
+							"</div>" +
+							"</td>" +
+							"<td>" + element.defeito + "</td>" + 
+							"<td>" + element.peca + "</td>" +
+							"</tr>"
+						);
+					});
+			    },
+			    error: function (jqXhr, textStatus, errorMessage) {
+				    $("#tabela").html("");
+			    }
+			})
+		})
 	</script>
 </body>
 </html>

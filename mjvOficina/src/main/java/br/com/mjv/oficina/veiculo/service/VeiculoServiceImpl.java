@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.mjv.oficina.defeito.model.Defeito;
 import br.com.mjv.oficina.peca.model.Peca;
 import br.com.mjv.oficina.veiculo.dao.VeiculoDao;
 import br.com.mjv.oficina.veiculo.model.Veiculo;
@@ -33,6 +34,11 @@ public class VeiculoServiceImpl implements VeiculoService {
 	@Override
 	public void linkarPecas(List<Peca> list, Integer idVeiculo) {
 		veiculoDao.linkarPecas(list, idVeiculo);
+	}
+
+	@Override
+	public void linkarProblemas(List<Peca> listPeca, Integer idVeiculo) {
+		veiculoDao.linkarProblemas(listPeca, idVeiculo);
 	}
 
 }
