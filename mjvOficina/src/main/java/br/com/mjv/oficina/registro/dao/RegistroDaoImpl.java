@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import br.com.mjv.oficina.problema.model.Problema;
@@ -25,6 +26,7 @@ import br.com.mjv.oficina.registroProblema.model.RegistroProblema;
 import br.com.mjv.oficina.registroProblema.model.RegistroProblemaRowMapper;
 import br.com.mjv.oficina.veiculo.dao.VeiculoDao;
 import br.com.mjv.oficina.veiculo.model.Veiculo;
+import br.com.mjv.oficina.veiculo.model.VeiculoRowMapper;
 import br.com.mjv.oficina.veiculo.service.VeiculoService;
 
 @Repository
@@ -42,6 +44,7 @@ public class RegistroDaoImpl implements RegistroDao {
 	private VeiculoDao veiculoDao;
 
 	@Override
+	@Transactional
 	public Integer cadastrarRegistro(Registro registro, Integer[] problemas) {
 		LOGGER.info("Inicio do método cadastrarRegistro");
 		
@@ -73,6 +76,7 @@ public class RegistroDaoImpl implements RegistroDao {
 	}
 
 	@Override
+	@Transactional
 	public void linkarProblemas(Integer idProblema, Integer idRegistro) {
 		LOGGER.info("Inicio do método linkarProblemas");
 		
@@ -91,9 +95,8 @@ public class RegistroDaoImpl implements RegistroDao {
 			MapSqlParameterSource param = new MapSqlParameterSource();
 			
 			if(!StringUtils.isEmpty(name)) {
-				Veiculo veiculo = veiculoDao.getVeiculoFirstResultByName(name);
-				sql.append("AND fkIdVeiculo = :fkIdVeiculo ");
-				param.addValue("fkIdVeiculo", veiculo.getIdVeiculo());
+				sql.append("AND nomeVeiculo = :nomeVeiculo ");
+				param.addValue("nomeVeiculo", name);
 			}
 			
 			if(dataInicio != null) {
@@ -110,8 +113,6 @@ public class RegistroDaoImpl implements RegistroDao {
 			 
 			List<Registro> listRegistro = template.query(sql.toString(), param, new RegistroRowMapper());
 			
-			System.out.println(listRegistro);
-			
 			LOGGER.info("Fim do método getAllRegistros");
 			return listRegistro;
 		}catch (EmptyResultDataAccessException e) {
@@ -121,16 +122,16 @@ public class RegistroDaoImpl implements RegistroDao {
 	}
 
 	@Override
-	public RegistroProblema getFirstRegistroProblemaIdByRegistroId(Integer id) {
+	public List<RegistroProblema> getRegistroProblemaListByRegistroId(Integer id) {
 		String sql = "SELECT * FROM TB_REGISTRO_PROBLEMA WHERE fkIdRegistro = :idRegistro";
 		try {
-			LOGGER.info("Inicio do método getFirstProblemaByRegistroId");
+			LOGGER.info("Inicio do método getRegistroProblemaListByRegistroId");
 			MapSqlParameterSource param = new MapSqlParameterSource().addValue("idRegistro", id);
-			RegistroProblema registroProblema = template.queryForObject(sql, param , new RegistroProblemaRowMapper());
-			LOGGER.info("Fim do método getFirstProblemaByRegistroId");
+			List<RegistroProblema> registroProblema = template.query(sql, param , new RegistroProblemaRowMapper());
+			LOGGER.info("Fim do método getRegistroProblemaListByRegistroId");
 			return registroProblema;
 		}catch(EmptyResultDataAccessException e) {
-			LOGGER.error("Erro emptyResult no método getFirstProblemaByRegistroId: " + e.getMessage());
+			LOGGER.error("Erro emptyResult no método getRegistroProblemaListByRegistroId: " + e.getMessage());
 			return null;
 		}
 	}
@@ -146,6 +147,37 @@ public class RegistroDaoImpl implements RegistroDao {
 			return problema;
 		}catch(EmptyResultDataAccessException e) {
 			LOGGER.error("Erro emptyResult no método getFirstProblemaByRegistroId: " + e.getMessage());
+			return null;
+		}
+	}
+
+	@Override
+	public Registro getById(Integer id) {
+		String sql = "SELECT * FROM TB_REGISTRO WHERE idRegistro = :idRegistro";
+		try {
+			LOGGER.info("Inicio do método getById");
+			MapSqlParameterSource param = new MapSqlParameterSource().addValue("idRegistro", id);
+			Registro registro = template.queryForObject(sql, param, new RegistroRowMapper());
+			LOGGER.info("Fim do método getById");
+			return registro;
+		}catch(EmptyResultDataAccessException e) {
+			LOGGER.error("Erro emptyResult no método getById: " + e.getMessage());
+			return null;
+		}
+	}
+
+	@Override
+	public List<Problema> getProblemaListByRegistroId(Integer id) {
+		String sql = "SELECT * FROM TB_PROBLEMA WHERE fkIdVeiculo = :idVeiculo";
+		LOGGER.info("Inicio do método getProblemaListByVeiculoId");
+		try {
+			List<Problema> list = new ArrayList<>();
+			MapSqlParameterSource param = new MapSqlParameterSource().addValue("idVeiculo", id);
+			list.addAll(template.query(sql, param , new ProblemaRowMapper()));
+			LOGGER.info("Fim do método getProblemaListByVeiculoId");
+			return list;
+		}catch(EmptyResultDataAccessException e) {
+			LOGGER.error("Erro emptyResult no método getProblemaListByVeiculoId: " + e.getMessage());
 			return null;
 		}
 	}

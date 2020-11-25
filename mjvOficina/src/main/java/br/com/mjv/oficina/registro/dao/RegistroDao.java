@@ -7,6 +7,7 @@ import br.com.mjv.oficina.peca.model.Peca;
 import br.com.mjv.oficina.problema.model.Problema;
 import br.com.mjv.oficina.registro.model.Registro;
 import br.com.mjv.oficina.registroProblema.model.RegistroProblema;
+import br.com.mjv.oficina.veiculo.model.Veiculo;
 
 public interface RegistroDao {
 
@@ -15,6 +16,12 @@ public interface RegistroDao {
 	 * @param registro
 	 */
 	Integer cadastrarRegistro(Registro registro, Integer[] problemas);
+	
+	/**
+	 * Retorna um registro de acordo com seu id
+	 * @return {@link Registro}
+	 */
+	Registro getById(Integer id);
 	
 	/**
 	 * 
@@ -26,11 +33,19 @@ public interface RegistroDao {
 	
 	/**
 	 * 
-	 * Retorna uma {@link RegistroProblema} que tenham o id do registro
+	 * Retorna uma List<{@link Problema}> que tenham o id do veiculo
 	 * @param id
-	 * @return {@link RegistroProblema}
+	 * @return List<{@link Problema}>
 	 */
-	RegistroProblema getFirstRegistroProblemaIdByRegistroId(Integer id);
+	List<Problema> getProblemaListByRegistroId(Integer id);
+	
+	/**
+	 * 
+	 * Retorna uma List<{@link RegistroProblema}> que tenham o id do registro
+	 * @param id
+	 * @return List<{@link RegistroProblema}>
+	 */
+	List<RegistroProblema> getRegistroProblemaListByRegistroId(Integer id);
 	
 	/**
 	 * Cria os vinculos entre as tabelas TB_REGISTRO e TB_PROBLEMA

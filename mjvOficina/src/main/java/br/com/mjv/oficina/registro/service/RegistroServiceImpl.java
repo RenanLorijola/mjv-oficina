@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.mjv.oficina.problema.model.Problema;
 import br.com.mjv.oficina.registro.dao.RegistroDao;
 import br.com.mjv.oficina.registro.model.Registro;
+import br.com.mjv.oficina.registroProblema.model.RegistroProblema;
 
 @Service
 public class RegistroServiceImpl implements RegistroService {
@@ -34,6 +35,21 @@ public class RegistroServiceImpl implements RegistroService {
 	@Override
 	public void linkarProblemas(Integer idProblema, Integer idRegistro) {
 		registroDao.linkarProblemas(idProblema, idRegistro);
+	}
+
+	@Override
+	public Registro getById(Integer id) {
+		return registroDao.getById(id);
+	}
+
+	@Override
+	public List<RegistroProblema> getRegistroProblemaListByRegistroId(Integer id) {
+		return registroDao.getRegistroProblemaListByRegistroId(id);
+	}
+
+	@Override
+	public Problema getProblemaById(Integer id) {
+		return registroDao.getProblemaById(id);
 	}
 
 	

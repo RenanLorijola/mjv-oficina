@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.mjv.oficina.defeito.model.Defeito;
 import br.com.mjv.oficina.defeito.model.DefeitoRowMapper;
@@ -47,6 +48,7 @@ public class DefeitoDaoImpl implements DefeitoDao {
 	}
 
 	@Override
+	@Transactional
 	public void cadastrarDefeito(Defeito defeito) {
 		LOGGER.info("Inicio do método cadastrarDefeito");
 		

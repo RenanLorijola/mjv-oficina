@@ -11,7 +11,7 @@
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 	<!-- Fontes -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -59,6 +59,13 @@
 			text-transform: uppercase !important;
 		}
 		
+		.registroColumn{
+			font-family: 'Catamaran', sans-serif !important;
+			font-size: 14px;
+			vertical-align: middle;
+			line-height: 2rem;
+		}
+		
 		.modal.modal-static .modal-dialog {
 		 -webkit-transform: none !important; transform: none !important;
 		}
@@ -76,58 +83,20 @@
 	<!-- Modal -->
 	<div class="modal" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-lg modal-dialog-centered">
-	    <div class="modal-content">
+	    <div class="modal-content">    
 	      <div class="modal-header row px-5 border-0">
 	      		<h3 class="my-4 col-12 w-100">Registros de defeitos veiculares</h3>
 	      		<div class="col-12 mb-3">
-		        	<div class="mdc-select mdc-select--outlined w-50">
-					  <div class="mdc-select__anchor" aria-labelledby="outlined-select-label">
-					    <span class="mdc-notched-outline">
-					      <span class="mdc-notched-outline__leading"></span>
-					      <span class="mdc-notched-outline__notch">
-					        <span id="outlined-select-label" class="mdc-floating-label">Tipo de veículo</span>
-					      </span>
-					      <span class="mdc-notched-outline__trailing"></span>
-					    </span>
-					    <span class="mdc-select__selected-text-container">
-					      <span id="demo-selected-text" class="mdc-select__selected-text"></span>
-					    </span>
-					    <span class="mdc-select__dropdown-icon">
-					      <svg
-					          class="mdc-select__dropdown-icon-graphic"
-					          viewBox="7 10 10 5" focusable="false">
-					        <polygon
-					            class="mdc-select__dropdown-icon-inactive"
-					            stroke="none"
-					            fill-rule="evenodd"
-					            points="7 10 12 15 17 10">
-					        </polygon>
-					        <polygon
-					            class="mdc-select__dropdown-icon-active"
-					            stroke="none"
-					            fill-rule="evenodd"
-					            points="7 15 12 10 17 15">
-					        </polygon>
-					      </svg>
-					    </span>
-					  </div>
-					
-					  <!-- Other elements from the select remain. -->
-					  <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
-					  	<ul class="mdc-list" role="listbox" aria-label="Food picker listbox">
-					      <c:forEach items="${veiculosList}" var="veiculo">
-					      <li class="mdc-list-item" aria-selected="false" data-value="grains" role="option">
-					        <span class="mdc-list-item__ripple"></span>
-					        <span class="mdc-list-item__text">
-					          ${ veiculo.nome }
-					        </span>
-					      </li>
-					      </c:forEach>
-					    </ul>
-					  </div>
-					</div>
+		        	<label for="veiculos">Tipo de veículo:</label> 
+					<select id="nameVeiculo" class="form-control" style="height: 50px; width: 60%">
+						<option value="" hidden>Selecione o veículo</option>
+						<option value="" >Todos</option>
+							<c:forEach items="${veiculosList}" var="veiculo">
+								  <option value="${ veiculo.nome }">${ veiculo.nome }</option>
+							 </c:forEach>
+					</select>
 		        </div>
-	      		<div class="col-6 my-3">
+	      		<div class="col-5 my-3">
 		        	<label class="mdc-text-field data-incio mdc-text-field--outlined mdc-text-field--with-leading-icon w-100">
 						  <span class="mdc-notched-outline">
 						   <span class="mdc-notched-outline__leading"></span>
@@ -137,11 +106,11 @@
 						    <span class="mdc-notched-outline__trailing"></span>
 						  </span>
 						  <i class="material-icons mdc-text-field__icon mdc-text-field__icon--leading tabindex="0" role="button">calendar_today</i>
-						  <input class="mdc-text-field__input" type="date" aria-labelledby="my-label-id">
+						  <input id="dataInicio" class="mdc-text-field__input" type="date" aria-labelledby="my-label-id">
 
 					</label>
 	        	</div>
-	        	<div class="col-6 my-3">
+	        	<div class="col-5 my-3">
 		        	<label class="mdc-text-field data-fim mdc-text-field--outlined mdc-text-field--with-leading-icon w-100">
 						  <span class="mdc-notched-outline">
 						   <span class="mdc-notched-outline__leading"></span>
@@ -151,7 +120,7 @@
 						    <span class="mdc-notched-outline__trailing"></span>
 						  </span>
 						  <i class="material-icons mdc-text-field__icon mdc-text-field__icon--leading tabindex="0" role="button">calendar_today</i>
-						  <input class="mdc-text-field__input" type="date" aria-labelledby="my-label-id">
+						  <input id="dataFim" class="mdc-text-field__input" type="date" aria-labelledby="my-label-id">
 					</label>
 	        	</div>
 	      	</div>
@@ -180,17 +149,17 @@
 						    <div class="card-header p-0" id="heading${ registro.idRegistro }">
 						        <div class="row">
 							  		<div class="col-1"></div>
-							  		<div class="col-3 py-3" style="font-family: 'Catamaran', sans-serif !important;font-size: 14px;vertical-align: middle;line-height: 2rem;">
+							  		<div class="col-3 py-3 registroColumn">
 							  			${ registro.nomeCliente }
 							  		</div>
-							  		<div class="col-2 py-3" style="font-family: 'Catamaran', sans-serif !important;font-size: 14px;vertical-align: middle;line-height: 2rem;">
-							  			${ registro.data }
+							  		<div class="col-2 py-3 registroColumn">
+							  			${ registro.data.toString().substring(8,10) }/${ registro.data.toString().substring(5,7) }/${ registro.data.toString().substring(0,4) }
 							  		</div>
-							  		<div class="col-3 py-3" style="font-family: 'Catamaran', sans-serif !important;font-size: 14px;vertical-align: middle;line-height: 2rem;">
+							  		<div class="col-3 py-3 registroColumn">
 							  			${ registro.nomeVeiculo }
 							  		</div>
 							  		<div class="col-3 py-3">
-							  			<button style="text-decoration: underline !important; color:#FF7800; border:none; font-family: 'Catamaran', sans-serif !important;font-size: 14px" class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse${ registro.idRegistro }" aria-expanded="true" aria-controls="collapse${ registro.idRegistro }">
+							  			<button onclick="ajaxDetalhes(this)" id="${ registro.idRegistro }" type="button" style="text-decoration: underline !important; color:#FF7800; border:none; font-family: 'Catamaran', sans-serif !important;font-size: 14px" class="btn btn-link btn-block text-left" data-toggle="collapse" data-target="#collapse${ registro.idRegistro }" aria-expanded="true" aria-controls="collapse${ registro.idRegistro }">
 								          Ver detalhes
 								        </button>
 							  		</div>
@@ -198,10 +167,8 @@
 						    </div>
 						    <div id="collapse${ registro.idRegistro }" class="collapse" aria-labelledby="heading${ registro.idRegistro }" data-parent="#accordionExample">
 						      <div class="card-body">
-						        <ul class="list-group">
-						          	<li class="list-group-item">Lista de problemas - futura implementação</li>
-						          	<li class="list-group-item">Lista de problemas - futura implementação</li>
-						          	<li class="list-group-item">Lista de problemas - futura implementação</li>
+						        <ul class="list-group list${ registro.idRegistro }">
+						        	<li class="list-group-item listDefeitoPeca">Defeito Peca</li>
 								</ul>
 						      </div>
 						    </div>
@@ -221,9 +188,9 @@
 					  >
 				<span class="mdc-button__label">Voltar ao menu</span>
 				</button></a>
-				<a class="col-5" href="/concluido"><button class="mdc-button px-3 w-100 mdc-button--raised" style="background:#702094; border-radius: 20px">
+				<button onclick="pesquisar()" class=" col-5 mdc-button px-3 w-100 mdc-button--raised" style="background:#702094; border-radius: 20px">
 		  			<span class="mdc-button__label">Pesquisar</span>
-				</button></a>
+				</button>
 	       </div>
 	    </div>
 	  </div>
@@ -234,8 +201,77 @@
 			mdc.ripple.MDCRipple.attachTo(document.querySelector('.mdc-button'));
 			mdc.textField.MDCTextField.attachTo(document.querySelector('.data-incio'));
 			mdc.textField.MDCTextField.attachTo(document.querySelector('.data-fim'));
-			mdc.select.MDCSelect.attachTo(document.querySelector('.mdc-select'));
 		})
+		
+		function ajaxDetalhes(button) {
+			console.log($(".list" + button.id))
+			
+			$.ajax({
+				method: "GET",
+				url: '/registro/getpecadefeito',
+				contentType: 'application/json',
+				data: {id: button.id},
+				success: function(response) {
+					$(".list" + button.id).html("");
+					
+					response.forEach((element) => {
+						$(".list" + button.id).append(
+							'<li class="list-group-item listDefeitoPeca ml-4 pl-3">' + element.nomePeca + ' - ' + element.nomeDefeito + '</li>'
+						);
+					});	
+			    },
+			    error: function (jqXhr, textStatus, errorMessage) {
+			    }
+			})
+		}
+
+		function pesquisar() {
+			console.log($("#nameVeiculo option:selected").val())
+			console.log($("#dataInicio").val())
+			console.log($("#dataFim").val())
+			
+			$.ajax({
+				method: "GET",
+				url: '/registro/consultar',
+				contentType: 'application/json',
+				data: {nameVeiculo: $("#nameVeiculo option:selected").val(), dataInicio: $("#dataInicio").val(), dataFim: $("#dataFim").val()},
+				success: function(response) {
+					$("#accordionExample").html("");
+					response.forEach((registro) => {
+						
+						$("#accordionExample").append(
+								'<div class="card">' + 
+							    '<div class="card-header p-0" id="heading' + registro.idRegistro + '">' +
+							       '<div class="row">' +
+								  		'<div class="col-1"></div>' +
+								  		'<div class="col-3 py-3 registroColumn">'+ registro.nomeCliente +
+								  		'</div>' +
+								  		'<div class="col-2 py-3 registroColumn">' + registro.data +
+								  		'</div>' +
+								  		'<div class="col-3 py-3 registroColumn">' + registro.nomeVeiculo +
+								  		'</div>' +
+								  		'<div class="col-3 py-3">' +
+								  			'<button onclick="ajaxDetalhes(this)" id="' + registro.idRegistro +  '" type="button" style="text-decoration: underline !important; color:#FF7800; border:none; line-height: 1.3rem" class="btn btn-link btn-block text-left registroColumn" data-toggle="collapse" data-target="#collapse' + registro.idRegistro + '" aria-expanded="true" aria-controls="collapse' + registro.idRegistro + '">' +
+									          'Ver detalhes'+
+									        '</button>' +
+								  		'</div>' +
+								  	'</div>' + 
+								'</div>' +
+							    '<div id="collapse' + registro.idRegistro + '" class="collapse" aria-labelledby="heading' + registro.idRegistro + '" data-parent="#accordionExample">' +
+							      '<div class="card-body">' +
+							        '<ul class="list-group list' + registro.idRegistro + '">' +
+							        	
+									'</ul>'+
+								  '</div>' + 
+								 '</div>' + 
+								'</div>'
+						);
+					});
+			    },
+			    error: function (jqXhr, textStatus, errorMessage) {
+			    }
+			})
+		}
 	</script>
 </body>
 </html>

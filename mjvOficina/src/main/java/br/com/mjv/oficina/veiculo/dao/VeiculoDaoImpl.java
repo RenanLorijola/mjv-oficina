@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.mjv.oficina.defeito.model.Defeito;
 import br.com.mjv.oficina.peca.model.Peca;
@@ -51,6 +52,7 @@ public class VeiculoDaoImpl implements VeiculoDao {
 	}
 
 	@Override
+	@Transactional
 	public Integer cadastrarVeiculo(Veiculo veiculo) {
 		LOGGER.info("Inicio do método cadastrarVeiculo");
 		
@@ -80,6 +82,7 @@ public class VeiculoDaoImpl implements VeiculoDao {
 	}
 
 	@Override
+	@Transactional
 	public void linkarPecas(List<Peca> list, Integer idVeiculo) {
 		LOGGER.info("Inicio do método linkarPecas");
 		
@@ -95,6 +98,7 @@ public class VeiculoDaoImpl implements VeiculoDao {
 	}
 	
 	@Override
+	@Transactional
 	public void linkarProblemas(List<Peca> listPeca, Integer idVeiculo) {
 		LOGGER.info("Inicio do método linkarProblemas");
 		

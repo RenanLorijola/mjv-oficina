@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.mjv.oficina.defeito.model.Defeito;
 import br.com.mjv.oficina.peca.model.Peca;
@@ -48,6 +49,7 @@ public class PecaDaoImpl implements PecaDao {
 	}
 
 	@Override
+	@Transactional
 	public Integer cadastrarPeca(Peca peca) {
 		LOGGER.info("Inicio do método cadastrarPeca");
 		
@@ -77,6 +79,7 @@ public class PecaDaoImpl implements PecaDao {
 	}
 
 	@Override
+	@Transactional
 	public void linkarDefeitos(List<Defeito> list, Integer idPeca) {
 		LOGGER.info("Inicio do método linkarDefeitos");
 		

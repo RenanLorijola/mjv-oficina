@@ -103,7 +103,7 @@
 							      </c:forEach>
 							    </select>
 							</div> 
-			        </div>
+			        	</div>
 		      	</div>
 				<div class="modal-body px-5">
 					<div class="row pb-4 px-3">

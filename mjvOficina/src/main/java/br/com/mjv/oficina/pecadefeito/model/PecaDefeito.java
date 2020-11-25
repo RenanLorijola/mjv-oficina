@@ -5,6 +5,8 @@ public class PecaDefeito {
 	private Integer idPecaDefeito;
 	private Integer fkIdPeca;
 	private Integer fkIdDefeito;
+	private String nomePeca;
+	private String nomeDefeito;
 	
 	public Integer getIdPecaDefeito() {
 		return idPecaDefeito;
@@ -23,6 +25,18 @@ public class PecaDefeito {
 	}
 	public void setFkIdDefeito(Integer fkIdDefeito) {
 		this.fkIdDefeito = fkIdDefeito;
+	}
+	public String getNomePeca() {
+		return nomePeca;
+	}
+	public void setNomePeca(String nomePeca) {
+		this.nomePeca = nomePeca;
+	}
+	public String getNomeDefeito() {
+		return nomeDefeito;
+	}
+	public void setNomeDefeito(String nomeDefeito) {
+		this.nomeDefeito = nomeDefeito;
 	}
 	
 	

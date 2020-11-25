@@ -1,6 +1,8 @@
 package br.com.mjv.oficina.registro.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -11,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +25,11 @@ import br.com.mjv.oficina.defeito.model.Defeito;
 import br.com.mjv.oficina.defeito.service.DefeitoService;
 import br.com.mjv.oficina.peca.model.Peca;
 import br.com.mjv.oficina.peca.service.PecaService;
+import br.com.mjv.oficina.pecadefeito.model.PecaDefeito;
 import br.com.mjv.oficina.problema.model.Problema;
 import br.com.mjv.oficina.registro.model.Registro;
 import br.com.mjv.oficina.registro.service.RegistroService;
+import br.com.mjv.oficina.registroProblema.model.RegistroProblema;
 import br.com.mjv.oficina.registroTela.model.RegistroTela;
 import br.com.mjv.oficina.veiculo.model.Veiculo;
 import br.com.mjv.oficina.veiculo.service.VeiculoService;
@@ -90,8 +95,41 @@ public class RegistroController {
 		}
 	}
 	
+	@RequestMapping(value="/getpecadefeito", method=RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody 
+	public ResponseEntity<Object> getPecaDefeito(@RequestParam(required = true) Integer id) {
+		LOGGER.info("Inicio do método @Get getPecaDefeito");
+		
+		List<RegistroProblema> listRegistroProblema = registroService.getRegistroProblemaListByRegistroId(id);
+		
+		if(listRegistroProblema == null) {
+			LOGGER.info("Fim do método @Get getPecaDefeito");
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}else {
+			List<Problema> listProblema = new ArrayList<>();
+			
+			for(RegistroProblema registroProblema : listRegistroProblema) {
+				listProblema.add(registroService.getProblemaById(registroProblema.getFkIdProblema()));
+			}
+			
+			List<PecaDefeito> listPecaDefeito = new ArrayList<>();		
+			
+			for(Problema problema : listProblema) {
+				PecaDefeito pecaDefeito = new PecaDefeito();
+				Peca peca = pecaService.getById(problema.getFkIdPeca());
+				pecaDefeito.setNomePeca(peca.getNome());
+				Defeito defeito = defeitoService.getById(problema.getFkIdDefeito());
+				pecaDefeito.setNomeDefeito(defeito.getNome());
+				
+				listPecaDefeito.add(pecaDefeito);
+			}
+			
+			return new ResponseEntity<Object>(listPecaDefeito, HttpStatus.OK);
+		}
+	}
+	
 	/**
-	 * Método para puxar um problema a partir do nome do veiculo
+	 * Método para puxar uma lista de problemas a partir do nome do veiculo
 	 * @param name
 	 * @return {@link ResponseEntity}
 	 */
@@ -138,6 +176,35 @@ public class RegistroController {
 		
 		LOGGER.info("Fim do método @Get consultarRegistro");
 		return "consultarregistro";
+	}
+	
+	@RequestMapping(value="/consultar", method=RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody 
+	public ResponseEntity<Object> getRegistros(@RequestParam(required = false) String nameVeiculo, @RequestParam(required = false) String dataInicio, @RequestParam(required = false) String dataFim) {
+		LOGGER.info("Início do método @GET getRegistros");
+		
+		Date dtInicio = null;
+		Date dtFim = null;
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+		
+		try {
+			if(!StringUtils.isEmpty(dataInicio)) {
+				dataInicio = dataInicio.substring(8, 10) + "/" + dataInicio.substring(5, 7) + "/" + dataInicio.substring(0, 4);
+				dtInicio = sdf.parse(dataInicio + " 00:00:00");
+			}
+			
+			if(!StringUtils.isEmpty(dataFim)) {
+				dataFim = dataFim.substring(8, 10) + "/" + dataFim.substring(5, 7) + "/" + dataFim.substring(0, 4);
+				dtFim = sdf.parse(dataFim + " 23:59:59");
+			}
+		}catch(Exception e) {
+			LOGGER.error("A data foi informada fora do padrão.");
+		}
+		
+		List<Registro> list = registroService.getAllRegistros(nameVeiculo, dtInicio, dtFim);
+		
+		LOGGER.info("Fim do método @GET getRegistros");
+		return new ResponseEntity<Object>(list, HttpStatus.OK);
 	}
 	
 }
